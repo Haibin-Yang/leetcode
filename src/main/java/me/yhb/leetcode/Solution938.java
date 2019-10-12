@@ -17,15 +17,12 @@ public class Solution938 {
         int sum = 0;
         Stack<TreeNode> stack = new Stack<>();
         TreeNode node = root;
-        while (!(stack.empty() && node == null)) {
-            if (node != null && node.left != null) {
+        while (!stack.isEmpty() || node != null) {
+            while (node != null) {
                 stack.push(node);
                 node = node.left;
-                continue;
             }
-            if (node == null) {
-                node = stack.pop();
-            }
+            node = stack.pop();
             int val = node.val;
             if (val >= L && val <= R) {
                 sum += val;
@@ -33,7 +30,6 @@ public class Solution938 {
                 break;
             }
             node = node.right;
-
         }
         return sum;
     }
