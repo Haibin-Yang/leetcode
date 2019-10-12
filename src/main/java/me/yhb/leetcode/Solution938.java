@@ -19,16 +19,20 @@ public class Solution938 {
         TreeNode node = root;
         while (!stack.isEmpty() || node != null) {
             while (node != null) {
-                stack.push(node);
-                node = node.left;
+                int val = node.val;
+                if (val < L) {
+                    node = node.right;
+                } else {
+                    stack.push(node);
+                    node = node.left;
+                }
             }
             node = stack.pop();
             int val = node.val;
-            if (val >= L && val <= R) {
-                sum += val;
-            } else if (val > R ) {
-                break;
+            if (val > R) {
+                return sum;
             }
+            sum += node.val;
             node = node.right;
         }
         return sum;
